@@ -10,5 +10,9 @@ namespace WebApplication3.Data
             
         }
         public DbSet<Value> Values { get; set; }
-    }
+        public DbSet<Town> Towns { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<SocialLinks> SocialLinks { get; set; }
+        public DbSet<User> Users { get; set; }
+    } 
 }
