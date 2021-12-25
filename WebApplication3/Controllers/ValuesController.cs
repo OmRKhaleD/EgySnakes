@@ -20,17 +20,18 @@ namespace WebApplication3.Controllers
         _context = context;
         }
         // GET api/values
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
-            return Ok(await _context.Values.ToListAsync());
+            return Ok(await _context.Towns.ToListAsync());
         }
         [AllowAnonymous]
         // GET api/values/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {
-            return Ok(await _context.Values.FirstOrDefaultAsync(x => x.Id == id));
+            return Ok(await _context.Towns.FirstOrDefaultAsync(x => x.Id == id));
         }
 
         // POST api/values

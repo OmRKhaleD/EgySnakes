@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Egy Snakes</a>
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Licenses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Training and Employment</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link ">Notifications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " (click)="logout()">Logout</a>
+        </li>
+      </ul>
+
+      <div *ngIf="loggedIn()" class="dropdown">
+        <a class="dropdown-toggle text-light">
+          Welcome User
+        </a>
+      
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#"><i class="fa fa-user"></i>Edit Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i>Logout</a>
+        </div>
+      </div>
+
+      <form *ngIf="!loggedIn()" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()">
+        <input class="form-control me-2" type="text" placeholder="Username" name="username"
+        aria-label="Username" required [(ngModel)]="model.username">
+        <input class="form-control me-2" type="password" placeholder="Password" name="password"
+        aria-label="Password" required [(ngModel)]="model.password">
+        <button [disabled]="!loginForm.valid" class="btn btn-success" type="submit">Login</button>
+      </form>
+    </div>
+</nav>
