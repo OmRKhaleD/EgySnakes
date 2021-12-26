@@ -1,29 +1,28 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
-export class ErrorInterceptor implements HttpInterceptor{
+export class ErrorInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(
             catchError(error => {
-                if(error instanceof HttpErrorResponse){
-                    if(error.status === 401){
+                if (error instanceof HttpErrorResponse) {
+                    if (error.status === 401) {
                         return throwError(error.statusText);
                     }
                     const applicationError = error.headers.get('Application-Error');
-                    if(applicationError){
+                    if (applicationError) {
                         console.error(applicationError);
                         return throwError(applicationError);
                     }
                     const serverError = error.error;
                     let modelStatsErrors = '';
-                    if(serverError && typeof serverError === 'object'){
-                        for(const key in serverError){
-                            if(serverError[key]){
-                                modelStatsErrors+= serverError[key]+ '\n';
-                            }
+                    if (serverError && typeof serverError === 'object') {
+                        for (const key in serverError) {
+                            if (serverError[key]) {
+                                modelStatsErrors += serverError[key] + '\n'; }
                         }
                     }
                     return throwError(modelStatsErrors || serverError || 'server error');
@@ -31,11 +30,9 @@ export class ErrorInterceptor implements HttpInterceptor{
             })
         );
     }
-    
 }
 
 export const ErrorInterceptorProvider = {
     provide: HTTP_INTERCEPTORS,
     useClass: ErrorInterceptor,
-    multi: true 
-}
+    multi: true };

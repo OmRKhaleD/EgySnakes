@@ -17,26 +17,26 @@ namespace WebApplication3.Data
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == username);
 
-            if(user == null)
+            if (user == null)
+                return null;
+            
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 return null;
 
-            if(!VerifyPasswordHash(password,user.PasswordHash,user.PasswordSalt))
-                return null;
-
-            return user;        
+            return user;      
         }
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            using( var hmac= new System.Security.Cryptography.HMACSHA512(passwordSalt)){
-                var computedHash=passwordHash=hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 for (int i = 0; i < computedHash.Length; i++)
                 {
-                    if (computedHash[i]!=passwordHash[i]) return false;
-
+                    if (computedHash[i] != passwordHash[i]) return false;
                 }
+                return true;
             }
-            return true;
         }
 
         public async Task<User> Register(User user, string password)
