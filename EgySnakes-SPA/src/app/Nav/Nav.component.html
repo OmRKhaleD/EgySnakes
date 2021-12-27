@@ -1,16 +1,16 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
   <div class="container">
-    <a class="navbar-brand" href="#">Egy Snakes</a>
+    <a class="navbar-brand" [routerLink]="['/home']">Egy Snakes</a>
 
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Licenses</a>
+      <li class="nav-item " routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/licenses']">Licenses</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Training and Employment</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/trainingAndEmployment']">Training and Employment</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Notifications</a>
+      <li class="nav-item" routerLinkActive="active" >
+        <a class="nav-link"[routerLink]="['/notifications']">Notifications</a>
       </li>
     </ul>
 
