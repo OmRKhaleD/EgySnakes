@@ -6,7 +6,10 @@ namespace WebApplication3.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Town Town { get; set; }
         public ICollection<User> Users { get; set; }
+        public ICollection<Town> Towns { get; set; }
+        public ICollection<Manager> Managers { get; set; }
+        public ICollection<Pharmacy> Pharmacies { get; set; }
+
     }
 }

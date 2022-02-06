@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-
-namespace WebApplication3.Models
+namespace WebApplication3.Dtos
 {
-    public class SocialLinks
+    public class SocialForDetailedDto
     {
         public int Id { get; set; }
         public string Whatsaspp { get; set; }
@@ -11,7 +9,5 @@ namespace WebApplication3.Models
         public string Facebook { get; set; }
         public string Twitter { get; set; }
         public string Instgram { get; set; }
-        public User User { get; set; }
-        public int UserId { get; set; }
     }
 }
