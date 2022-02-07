@@ -22,7 +22,7 @@ this.authService.login(this.model).subscribe(next => {
 }, error => {
  this.alertify.error(error);
 }, () => {
-  this.router.navigate(['/licenses']);
+  this.router.navigate(['/ManagerList']);
 });
   }
 

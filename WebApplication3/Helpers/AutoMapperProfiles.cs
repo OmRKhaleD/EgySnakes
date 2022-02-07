@@ -17,6 +17,12 @@ namespace WebApplication3.Helpers
                     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
                 });
             CreateMap<SocialLinks, SocialForDetailedDto>();
+            CreateMap<Manager, ManagerForListDto>();
+            CreateMap<City, CityDto>();
+            CreateMap<Town, TownDto>();
+            CreateMap<User, UserForManagerDto>().ForMember(dest => dest.Age, opt => {
+                    opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
+                });
         }
     }
 }

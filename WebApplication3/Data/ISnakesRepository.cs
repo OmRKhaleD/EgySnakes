@@ -11,5 +11,7 @@ namespace WebApplication3.Data
          Task<bool> SaveAll();
          Task<IEnumerable<User>> GetUsers();
          Task<User> GetUser(int id);
+         Task<IEnumerable<Manager>> GetManagers();
+         Task <Manager> GetManager(int id);
     }
 }

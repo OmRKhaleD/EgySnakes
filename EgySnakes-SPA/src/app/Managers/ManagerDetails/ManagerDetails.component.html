@@ -1,0 +1,59 @@
+<div class="container mt-4">
+    <div class="row">
+      <h1>{{manager?.user.fullName}}'s Profile</h1>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="card">
+          <img class="card-img-top img-thumbnail" src="{{manager?.user.photo}}" alt="{{manager?.user.fullName}}">
+          <div class="card-body">
+            <div>
+              <strong>Location:</strong>
+              <p>{{manager?.user.city.name}}, {{manager?.user.town.name}}</p>
+            </div>
+            <div>
+              <strong>Age:</strong>
+              <p>{{manager?.user.age}}</p>
+            </div>
+            <div>
+              <strong>Last Active:</strong>
+              <p>{{manager?.user.lastActive}}</p>
+            </div>
+            <div>
+              <strong>Member Since:</strong>
+              <p>{{manager?.user.created}}</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="btn-group d-flex">
+              <button class="btn btn-primary w-100">Like</button>
+              <button class="btn btn-success w-100">Message</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="tab-panel">
+          <tabset class="member-tabset">
+            <tab heading={{manager?.user.fullName}}>
+              <h4>Whatsapp</h4>
+              <p>{{manager?.user.socialLinks.whatsaspp}}</p>
+              <h4>Telegram</h4>
+              <p>{{manager?.user.socialLinks.telegram}}</p>
+              <h4>Email</h4>
+              <p>{{manager?.user.socialLinks.email}}</p>
+              <h4>Facebook</h4>
+              <p>{{manager?.user.socialLinks.facebook}}</p>
+              <h4>twitter</h4>
+              <p>{{manager?.user.socialLinks.twitter}}</p>
+              <h4>Instagram</h4>
+              <p>{{manager?.user.socialLinks.instgram}}</p>
+            </tab>
+            <tab heading="Messages">
+              <p>Messages will go here</p>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
