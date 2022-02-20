@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -34,6 +36,16 @@ namespace WebApplication3.Controllers
             var managerToShow =  _mapper.Map<ManagerForListDto>(manager);
 
             return Ok(managerToShow);
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateManager(int id, ManagerForUpdateDto managerForUpdateDto){
+            if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            var managerFromRepo = await _repo.GetManagerForUpdate(id);
+            _mapper.Map(managerForUpdateDto, managerFromRepo);
+            if(await _repo.SaveAll())
+                return NoContent();
+            throw new Exception($"Updating manager with {id} faild on save");    
         }
     }
 }

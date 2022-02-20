@@ -73,7 +73,8 @@ namespace WebApplication3.Migrations
 
                     b.HasIndex("TownId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Managers");
                 });
@@ -127,7 +128,8 @@ namespace WebApplication3.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("PhGraduateds");
                 });
@@ -163,7 +165,7 @@ namespace WebApplication3.Migrations
 
                     b.Property<string>("Facebook");
 
-                    b.Property<string>("Instgram");
+                    b.Property<string>("Instagram");
 
                     b.Property<string>("Telegram");
 
@@ -171,11 +173,12 @@ namespace WebApplication3.Migrations
 
                     b.Property<int>("UserId");
 
-                    b.Property<string>("Whatsaspp");
+                    b.Property<string>("Whatsapp");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("SocialLinks");
                 });
@@ -209,6 +212,8 @@ namespace WebApplication3.Migrations
 
                     b.Property<string>("FullName");
 
+                    b.Property<string>("Gender");
+
                     b.Property<DateTime>("LastActive");
 
                     b.Property<string>("NationalId");
@@ -220,8 +225,6 @@ namespace WebApplication3.Migrations
                     b.Property<string>("Phone");
 
                     b.Property<string>("Photo");
-
-                    b.Property<string>("Sex");
 
                     b.Property<int>("TownId");
 
@@ -251,7 +254,7 @@ namespace WebApplication3.Migrations
             modelBuilder.Entity("WebApplication3.Models.Assistant", b =>
                 {
                     b.HasOne("WebApplication3.Models.User", "User")
-                        .WithMany("Assistants")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -269,8 +272,8 @@ namespace WebApplication3.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WebApplication3.Models.User", "User")
-                        .WithMany("Managers")
-                        .HasForeignKey("UserId")
+                        .WithOne("Managers")
+                        .HasForeignKey("WebApplication3.Models.Manager", "UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -295,15 +298,15 @@ namespace WebApplication3.Migrations
             modelBuilder.Entity("WebApplication3.Models.PhGraduated", b =>
                 {
                     b.HasOne("WebApplication3.Models.User", "User")
-                        .WithMany("Graduateds")
-                        .HasForeignKey("UserId")
+                        .WithOne("Graduateds")
+                        .HasForeignKey("WebApplication3.Models.PhGraduated", "UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("WebApplication3.Models.PhStudent", b =>
                 {
                     b.HasOne("WebApplication3.Models.User", "User")
-                        .WithMany("Students")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -311,8 +314,8 @@ namespace WebApplication3.Migrations
             modelBuilder.Entity("WebApplication3.Models.SocialLinks", b =>
                 {
                     b.HasOne("WebApplication3.Models.User", "User")
-                        .WithMany("SocialLinks")
-                        .HasForeignKey("UserId")
+                        .WithOne("SocialLinks")
+                        .HasForeignKey("WebApplication3.Models.SocialLinks", "UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

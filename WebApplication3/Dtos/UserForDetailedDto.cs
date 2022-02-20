@@ -8,10 +8,10 @@ namespace WebApplication3.Dtos
     {
         public int Id { get; set; }
         public string UserName { get; set; }
-        public string Sex { get; set; }
+        public string Gender { get; set; }
         public TownDto Town { get; set; }
         public CityDto City { get; set; }
-        public ICollection<SocialForDetailedDto> SocialLinks { get; set; }
+        public SocialForDetailedDto SocialLinks { get; set; }
         public string Phone { get; set; }
         public int Age { get; set; }
         public string FullName { get; set; }
@@ -19,5 +19,9 @@ namespace WebApplication3.Dtos
         public DateTime LastActive { get; set; }
         public string Photo { get; set; }
         public string NationalId { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public ManagerForListDto managers { get; set; }
+        public int CityId { get; set; }
+        public int TownId { get; set; }
     }
 }

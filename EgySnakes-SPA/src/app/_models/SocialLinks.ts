@@ -1,9 +1,9 @@
 export interface SocialLinks {
     id: number;
-    whatsaspp: string;
+    whatsapp: string;
     telegram: string;
     email: string;
     facebook: string;
     twitter?: string;
-    instgram?: string;
+    instagram?: string;
 }

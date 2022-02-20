@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication3.Data;
+using WebApplication3.Dtos;
 
 namespace WebApplication3.Controllers
 {
@@ -15,23 +17,30 @@ namespace WebApplication3.Controllers
     public class ValuesController : ControllerBase
     {
         private readonly DataContext _context;
-        public ValuesController(DataContext context)
+        private readonly ISnakesRepository _repo;
+        private readonly IMapper _mapper;
+        public ValuesController(DataContext context, ISnakesRepository repo, IMapper mapper)
         {
-        _context = context;
+            _mapper = mapper;
+            _repo = repo;
+            _context = context;
         }
         // GET api/values
-        [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetValues()
+        public async Task<IActionResult> GetCities()
         {
-            return Ok(await _context.Towns.ToListAsync());
+            var cities = await _repo.GetCities();
+            var citiesToShow = _mapper.Map<IEnumerable<CityDto>> (cities);
+            return Ok(citiesToShow);
         }
-        [AllowAnonymous]
+
         // GET api/values/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetValue(int id)
+        public async Task<IActionResult> GetTowns(int id)
         {
-            return Ok(await _context.Towns.FirstOrDefaultAsync(x => x.Id == id));
+            var towns = await _context.Towns.Where(x => x.CityId == id).ToListAsync();
+            var townsToShow = _mapper.Map<IEnumerable<TownDto>> (towns);
+            return Ok(townsToShow);
         }
 
         // POST api/values

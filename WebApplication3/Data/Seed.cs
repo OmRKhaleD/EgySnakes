@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using WebApplication3.Models;
 
@@ -19,6 +21,21 @@ namespace WebApplication3.Data
                 passwordSalt= hmac.Key;
                 paswwordHash=hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
+        }
+
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            var users = await _context.Users.ToListAsync();
+            foreach (var user in users)
+            {
+                byte[] passwordHash, passwordSalt;
+                CreatePasswordHash("password", out passwordHash, out passwordSalt);
+                user.PasswordHash = passwordHash;
+                user.PasswordSalt = passwordSalt;
+                _context.Users.Update(user);
+            }
+            _context.SaveChanges();
+            return users;
         }
         public void SeedUser() {
             Random rnd = new Random();

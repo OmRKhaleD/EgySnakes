@@ -60,7 +60,7 @@ namespace WebApplication3.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     UserName = table.Column<string>(nullable: true),
-                    Sex = table.Column<string>(nullable: true),
+                    Gender = table.Column<string>(nullable: true),
                     TownId = table.Column<int>(nullable: false),
                     CityId = table.Column<int>(nullable: false),
                     Phone = table.Column<string>(nullable: true),
@@ -239,12 +239,12 @@ namespace WebApplication3.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Whatsaspp = table.Column<string>(nullable: true),
+                    Whatsapp = table.Column<string>(nullable: true),
                     Telegram = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Facebook = table.Column<string>(nullable: true),
                     Twitter = table.Column<string>(nullable: true),
-                    Instgram = table.Column<string>(nullable: true),
+                    Instagram = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -276,7 +276,8 @@ namespace WebApplication3.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Managers_UserId",
                 table: "Managers",
-                column: "UserId");
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pharmacies_CityId",
@@ -296,7 +297,8 @@ namespace WebApplication3.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_PhGraduateds_UserId",
                 table: "PhGraduateds",
-                column: "UserId");
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_PhStudents_UserId",
@@ -306,7 +308,8 @@ namespace WebApplication3.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_SocialLinks_UserId",
                 table: "SocialLinks",
-                column: "UserId");
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Towns_CityId",

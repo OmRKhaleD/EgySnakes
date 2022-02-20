@@ -8,7 +8,7 @@ namespace WebApplication3.Dtos
     {
         public int Id { get; set; }
         public string UserName { get; set; }
-        public string Sex { get; set; }
+        public string Gender { get; set; }
         public TownDto Town { get; set; }
         public CityDto City { get; set; }
         public string Phone { get; set; }

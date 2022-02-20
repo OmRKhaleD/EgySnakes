@@ -1,18 +1,24 @@
 import { City } from "./City";
+import { Manager } from "./Manager";
 import { SocialLinks } from "./SocialLinks";
 import { Town } from "./Town";
 
 export interface User {
     id: number;
     username: string;
-    fullname: string;
+    fullName: string;
     age: number;
     gender: string;
     created: Date;
-    lastactive: Date;
+    lastActive: Date;
     photo: string;
     city: City;
     town: Town;
-    nationalid: number;
-    sociallinks: SocialLinks[];
+    nationalId: number;
+    socialLinks: SocialLinks;
+    birthday: Date;
+    managers: Manager;
+    phone: number;
+    cityId: number;
+    townId: number;
 }

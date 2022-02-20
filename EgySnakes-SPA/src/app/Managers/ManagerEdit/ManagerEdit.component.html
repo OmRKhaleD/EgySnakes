@@ -1,0 +1,138 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-sm-4">
+            <h1>Your Profile</h1>
+        </div>
+        <div class="col-sm-8">
+            <div *ngIf="editForm1.dirty || edit2form.dirty || edit3form.dirty" class="alert alert-info">
+                <strong>Information:</strong>You may made changes. Any unsaved changes will be lost!
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <img class="card-img-top img-thumbnail" src="{{user.photo}}" alt="{{user.fullName}}">
+                <div class="card-body">
+                    <div>
+                        <strong>Location:</strong>
+                        <p>{{user.city.name}}, {{user.town.name}}</p>
+                    </div>
+                    <div>
+                        <strong>Age:</strong>
+                        <p>{{user.age}}</p>
+                    </div>
+                    <div>
+                        <strong>Last Active:</strong>
+                        <p>{{user.lastActive}}</p>
+                    </div>
+                    <div>
+                        <strong>Member Since:</strong>
+                        <p>{{user.created}}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="tab-panel">
+                <tabset class="member-tabset">
+                    <tab heading="Edit Profile">
+                        <form #editForm1="ngForm" id="editForm1" (ngSubmit)="updateUser()">
+                            <h4>
+                                Full Name
+                            </h4>
+                            <input name="fullname" type=" text " class="form-control " [(ngModel)]="user.fullName">
+                            <h4>
+                                Username
+                            </h4>
+                            <input name="username" type=" text " class="form-control " [(ngModel)]="user.userName">
+                            <h4>
+                                National Id
+                            </h4>
+                            <input name="nationalId" type=" text " class="form-control " [(ngModel)]="user.nationalId">
+                            <h4>BirthDay</h4>
+                            <input name="birthday" type=" date " class="form-control " [(ngModel)]="user.dateOfBirth">
+                            <h4>Phone</h4>
+                            <input name="phone" type=" date " class="form-control " [(ngModel)]="user.phone">
+                            <h4>
+                                Gender
+                            </h4>
+                            <select name="gender" class="form-control " [value]="user.gender" [(ngModel)]="user.gender">
+                                <option [value]="'male'">male</option>
+                                <option [value]="'female'">female</option>
+                        </select>
+                            <h4>City</h4>
+                            <select class="form-control" name="city" [(ngModel)]="user.city" (change)="updateCity()">
+                                <option *ngFor="let city of cities"    [ngValue]="city"  >
+                                {{city.name}}
+                            </option>
+                        </select>
+                            <h4>
+                                Town
+                            </h4>
+                            <select class="form-control" name="town" [(ngModel)]="user.town">
+                            <option *ngFor="let town of towns"  [ngValue]="town">
+                                {{town.name}}
+                            </option>
+                        </select>
+                            <button [disabled]="!editForm1.dirty" class="btn btn-success btn-block">Save Changes</button>
+                        </form>
+                    </tab>
+                    <tab heading="Edit Social">
+                        <form #edit2form="ngForm" (ngSubmit)="updateSocial()">
+                            <h4>Whatsapp</h4>
+                            <input name="whatsapp" type=" text " class="form-control " [(ngModel)]="user.socialLinks.whatsapp">
+                            <h4>Telegram</h4>
+                            <input name="telegram" type=" text " class="form-control " [(ngModel)]="user.socialLinks.telegram">
+                            <h4>Email</h4>
+                            <input name=" email " type=" text " class="form-control " [(ngModel)]="user.socialLinks.email ">
+                            <h4>Facebook</h4>
+                            <input name="facebook " type=" text " class="form-control " [(ngModel)]="user.socialLinks.facebook ">
+                            <h4>twitter</h4>
+                            <input name="twitter " type=" text " class="form-control " [(ngModel)]="user.socialLinks.twitter ">
+                            <h4>Instagram</h4>
+                            <input name="instagram " type=" text " class="form-control " [(ngModel)]="user.socialLinks.instagram ">
+                            <button [disabled]="!edit2form.dirty" class="btn btn-success btn-block">Save Changes</button>
+                        </form>
+                    </tab>
+                    <tab heading="Edit Manager">
+                        <form #edit3form="ngForm" (ngSubmit)="updateManager()">
+                            <h4>Avilable Date</h4>
+                            <input name="avilabledate" type=" text " class="form-control " [(ngModel)]="user.managers.avilableDate">
+                            <h4>Job Type</h4>
+                            <select name="jobtype" class="form-control " [value]="user.managers.jobType" [(ngModel)]="user.managers.jobType">
+                                <option [value]="'دائم'">دائم</option>
+                                <option [value]="'مؤقت'">مؤقت</option>
+                        </select>
+                            <h4>Drugs</h4>
+                            <select name="drugs" class="form-control " [value]="user.managers.drugs" [(ngModel)]="user.managers.drugs">
+                                <option [value]="'بدون'">بدون</option>
+                                <option [value]="'بجدول'">بجدول/option>
+                        </select>
+                            <h4>Salary</h4>
+                            <input name="salary " type=" text " class="form-control " [(ngModel)]="user.managers.salary ">
+                            <h4>City</h4>
+                            <select class="form-control" name="city" [(ngModel)]="user.managers.city" (change)="updateCityM()">
+                            <option *ngFor="let city of cities" [ngValue]="city">
+                                {{city.name}}
+                            </option>
+                        </select>
+                            <h4>
+                                Town
+                            </h4>
+                            <select class="form-control" name="town" [(ngModel)]="user.managers.town">
+                            <option *ngFor="let town of towns" [ngValue]="town">
+                                {{town.name}}
+                            </option>
+                        </select>
+                            <button [disabled]="!edit3form.dirty" class="btn btn-success btn-block">Save Changes</button>
+                        </form>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+</div>

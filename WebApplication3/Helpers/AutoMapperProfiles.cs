@@ -20,6 +20,11 @@ namespace WebApplication3.Helpers
             CreateMap<Manager, ManagerForListDto>();
             CreateMap<City, CityDto>();
             CreateMap<Town, TownDto>();
+            CreateMap<ManagerForUpdateDto, Manager>();
+            CreateMap<SocialForUpdateDto, SocialLinks>();
+            CreateMap<UserForUpdateDto, User>();
+            CreateMap<SocialForUpdateDto, SocialLinks>();
+            CreateMap<ManagerForUpdateDto, Manager>();
             CreateMap<User, UserForManagerDto>().ForMember(dest => dest.Age, opt => {
                     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
                 });

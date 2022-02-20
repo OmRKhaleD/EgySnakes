@@ -15,14 +15,18 @@ export class ManagerDetailsComponent implements OnInit {
   constructor(private managerService: ManagerService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadManager();
+    this.route.data.subscribe(data => {
+      this.manager = data['manager'];
+    });
+    console.log(this.manager);
   }
-  loadManager() {
+  /*loadManager() {
     this.managerService.getManager(+this.route.snapshot.params['id']).subscribe((manager: Manager) => {
       this.manager = manager;
+      console.log(manager);
     }, error => {
       this.alertify.error(error);
     });
-  }
+  }*/
 
 }

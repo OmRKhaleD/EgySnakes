@@ -6,9 +6,11 @@ export interface Manager {
     id: number;
     city: City;
     town: Town;
-    avilable: Date;
-    jobTybe: string;
+    avilableDate: Date;
+    jobType: string;
     drugs: string;
     salary: number;
     user: User;
+    cityId: number;
+    townId: number;
 }

@@ -17,5 +17,10 @@ namespace WebApplication3.Helpers
                 age--;
             return age;    
         }
+        public static string getDate(this DateTime theDateTime){
+            var newDate=theDateTime.ToShortDateString();
+            var d = Convert.ToDateTime(newDate).Date;
+            return newDate;
+        }
     }
 }

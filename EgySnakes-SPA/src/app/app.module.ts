@@ -15,6 +15,7 @@ import { RegisterComponent } from './Register/Register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
 import { ManagerListComponent } from './managers/ManagerList/ManagerList.component';
+import { ManagerEditComponent } from './managers/ManagerEdit/ManagerEdit.component';
 import { TrainingAndEmploymentComponent } from './Training-and-Employment/Training-and-Employment.component';
 import { NotificationsComponent } from './Notifications/Notifications.component';
 import { RouterModule } from '@angular/router';
@@ -23,6 +24,15 @@ import { UserService } from './_services/user.service';
 import { ManagerService } from './_services/manager.service';
 import { MangerCardComponent } from './Managers/MangerCard/MangerCard.component';
 import { ManagerDetailsComponent } from './Managers/ManagerDetails/ManagerDetails.component';
+import { ManagerDetailsResolver } from './_resolvers/managerDetail.resolver';
+import { ManagerListResolver } from './_resolvers/managerList.resolver';
+import { NgxGalleryModule } from 'ngx-gallery';
+import { ManagerEditResolver } from './_resolvers/managerEdit.resolver';
+import { CityTownService } from './_services/cityTown.service';
+import { CityTownComponent } from './CityTown/CityTown.component';
+import { CityResolver } from './_resolvers/city.resolver';
+import { TownResolver } from './_resolvers/town.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 
 
@@ -31,7 +41,7 @@ export function tokenGetter(){
 }
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
       NavComponent,
       HomeComponent,
@@ -40,7 +50,9 @@ export function tokenGetter(){
       TrainingAndEmploymentComponent,
       NotificationsComponent,
       MangerCardComponent,
-      ManagerDetailsComponent
+      ManagerDetailsComponent,
+      ManagerEditComponent,
+      CityTownComponent
    ],
   imports: [
     BrowserModule,
@@ -48,7 +60,7 @@ export function tokenGetter(){
     FormsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    TabsModule.forRoot(),
+    NgxGalleryModule,
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({
       config: {
@@ -62,8 +74,15 @@ export function tokenGetter(){
     ErrorInterceptorProvider,
     AlertifyService,
     AuthGuard,
+    PreventUnsavedChanges,
     UserService,
-    ManagerService
+    ManagerService,
+    CityTownService,
+    ManagerDetailsResolver,
+    ManagerListResolver,
+    ManagerEditResolver,
+    CityResolver,
+    TownResolver
   ],
   bootstrap: [AppComponent]
 })
