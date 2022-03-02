@@ -21,6 +21,8 @@ namespace WebApplication3.Helpers
             CreateMap<City, CityDto>();
             CreateMap<Town, TownDto>();
             CreateMap<ManagerForUpdateDto, Manager>();
+            CreateMap<PhotoCreationDto, Photo>();
+            CreateMap<Photo, PhotoDto>();
             CreateMap<SocialForUpdateDto, SocialLinks>();
             CreateMap<UserForUpdateDto, User>();
             CreateMap<SocialForUpdateDto, SocialLinks>();

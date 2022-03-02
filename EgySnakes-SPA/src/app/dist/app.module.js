@@ -41,6 +41,8 @@ var CityTown_component_1 = require("./CityTown/CityTown.component");
 var city_resolver_1 = require("./_resolvers/city.resolver");
 var town_resolver_1 = require("./_resolvers/town.resolver");
 var prevent_unsaved_changes_guard_1 = require("./_guards/prevent-unsaved-changes.guard");
+var UserPhotoEditor_component_1 = require("./Managers/UserPhotoEditor/UserPhotoEditor.component");
+var ng2_file_upload_1 = require("ng2-file-upload");
 function tokenGetter() {
     return localStorage.getItem('token');
 }
@@ -61,12 +63,14 @@ var AppModule = /** @class */ (function () {
                 MangerCard_component_1.MangerCardComponent,
                 ManagerDetails_component_1.ManagerDetailsComponent,
                 ManagerEdit_component_1.ManagerEditComponent,
-                CityTown_component_1.CityTownComponent
+                CityTown_component_1.CityTownComponent,
+                UserPhotoEditor_component_1.UserPhotoEditorComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
                 http_1.HttpClientModule,
                 forms_1.FormsModule,
+                ng2_file_upload_1.FileUploadModule,
                 dropdown_1.BsDropdownModule.forRoot(),
                 tabs_1.TabsModule.forRoot(),
                 ngx_gallery_1.NgxGalleryModule,

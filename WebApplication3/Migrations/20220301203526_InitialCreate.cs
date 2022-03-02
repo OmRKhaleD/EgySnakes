@@ -70,7 +70,6 @@ namespace WebApplication3.Migrations
                     FullName = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     LastActive = table.Column<DateTime>(nullable: false),
-                    Photo = table.Column<string>(nullable: true),
                     NationalId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -96,7 +95,6 @@ namespace WebApplication3.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    NationalIdPhoto = table.Column<string>(nullable: true),
                     CV = table.Column<string>(nullable: true),
                     Qualification = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false)
@@ -159,8 +157,7 @@ namespace WebApplication3.Migrations
                     UserId = table.Column<int>(nullable: false),
                     TownId = table.Column<int>(nullable: false),
                     CityId = table.Column<int>(nullable: false),
-                    DetailedAddress = table.Column<string>(nullable: true),
-                    LicensePhoto = table.Column<string>(nullable: true)
+                    DetailedAddress = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -186,31 +183,6 @@ namespace WebApplication3.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PhGraduateds",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    University = table.Column<string>(nullable: true),
-                    CollageType = table.Column<string>(nullable: true),
-                    YearOfGraduation = table.Column<int>(nullable: false),
-                    JobType = table.Column<string>(nullable: true),
-                    MainGuildCard = table.Column<string>(nullable: true),
-                    SubGuildCard = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PhGraduateds", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PhGraduateds_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "PhStudents",
                 columns: table => new
                 {
@@ -219,7 +191,6 @@ namespace WebApplication3.Migrations
                     University = table.Column<string>(nullable: true),
                     CollageType = table.Column<string>(nullable: true),
                     Year = table.Column<string>(nullable: true),
-                    CollageCardPhoto = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -252,6 +223,85 @@ namespace WebApplication3.Migrations
                     table.PrimaryKey("PK_SocialLinks", x => x.Id);
                     table.ForeignKey(
                         name: "FK_SocialLinks_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Photo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Url = table.Column<string>(nullable: true),
+                    PublicId = table.Column<string>(nullable: true),
+                    AssistantId = table.Column<int>(nullable: true),
+                    PhStudentId = table.Column<int>(nullable: true),
+                    PharmacyId = table.Column<int>(nullable: true),
+                    UserId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photo", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Photo_Assistants_AssistantId",
+                        column: x => x.AssistantId,
+                        principalTable: "Assistants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Photo_PhStudents_PhStudentId",
+                        column: x => x.PhStudentId,
+                        principalTable: "PhStudents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Photo_Pharmacies_PharmacyId",
+                        column: x => x.PharmacyId,
+                        principalTable: "Pharmacies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Photo_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PhGraduateds",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    University = table.Column<string>(nullable: true),
+                    CollageType = table.Column<string>(nullable: true),
+                    YearOfGraduation = table.Column<int>(nullable: false),
+                    JobType = table.Column<string>(nullable: true),
+                    MainGuildCardId = table.Column<int>(nullable: true),
+                    SubGuildCardId = table.Column<int>(nullable: true),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PhGraduateds", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PhGraduateds_Photo_MainGuildCardId",
+                        column: x => x.MainGuildCardId,
+                        principalTable: "Photo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PhGraduateds_Photo_SubGuildCardId",
+                        column: x => x.SubGuildCardId,
+                        principalTable: "Photo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PhGraduateds_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -295,8 +345,42 @@ namespace WebApplication3.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PhGraduateds_MainGuildCardId",
+                table: "PhGraduateds",
+                column: "MainGuildCardId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PhGraduateds_SubGuildCardId",
+                table: "PhGraduateds",
+                column: "SubGuildCardId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PhGraduateds_UserId",
                 table: "PhGraduateds",
+                column: "UserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photo_AssistantId",
+                table: "Photo",
+                column: "AssistantId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photo_PhStudentId",
+                table: "Photo",
+                column: "PhStudentId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photo_PharmacyId",
+                table: "Photo",
+                column: "PharmacyId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photo_UserId",
+                table: "Photo",
                 column: "UserId",
                 unique: true);
 
@@ -330,25 +414,28 @@ namespace WebApplication3.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Assistants");
-
-            migrationBuilder.DropTable(
                 name: "Managers");
 
             migrationBuilder.DropTable(
-                name: "Pharmacies");
-
-            migrationBuilder.DropTable(
                 name: "PhGraduateds");
-
-            migrationBuilder.DropTable(
-                name: "PhStudents");
 
             migrationBuilder.DropTable(
                 name: "SocialLinks");
 
             migrationBuilder.DropTable(
                 name: "Values");
+
+            migrationBuilder.DropTable(
+                name: "Photo");
+
+            migrationBuilder.DropTable(
+                name: "Assistants");
+
+            migrationBuilder.DropTable(
+                name: "PhStudents");
+
+            migrationBuilder.DropTable(
+                name: "Pharmacies");
 
             migrationBuilder.DropTable(
                 name: "Users");

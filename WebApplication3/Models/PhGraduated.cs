@@ -7,8 +7,8 @@ namespace WebApplication3.Models
         public string CollageType { get; set; }
         public int YearOfGraduation { get; set; }
         public string JobType { get; set; } //نوع وظيفته
-        public string MainGuildCard { get; set; }
-        public string SubGuildCard { get; set; }
+        public Photo MainGuildCard { get; set; }
+        public Photo SubGuildCard { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
     }

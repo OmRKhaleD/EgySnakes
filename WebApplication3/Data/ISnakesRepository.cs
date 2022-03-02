@@ -17,5 +17,6 @@ namespace WebApplication3.Data
          Task <IEnumerable<City>> GetCities ();
          Task<SocialLinks> GetSocialLinksForUpdate(int id);
          Task<Manager> GetManagerForUpdate(int id);
+         Task<Photo> GetUserPhoto(int id);
     }
 }

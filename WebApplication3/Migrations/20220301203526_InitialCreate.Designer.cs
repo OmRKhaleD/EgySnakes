@@ -9,7 +9,7 @@ using WebApplication3.Data;
 namespace WebApplication3.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220209140447_InitialCreate")]
+    [Migration("20220301203526_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,8 +24,6 @@ namespace WebApplication3.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("CV");
-
-                    b.Property<string>("NationalIdPhoto");
 
                     b.Property<string>("Qualification");
 
@@ -90,8 +88,6 @@ namespace WebApplication3.Migrations
 
                     b.Property<string>("DetailedAddress");
 
-                    b.Property<string>("LicensePhoto");
-
                     b.Property<string>("Name");
 
                     b.Property<int>("TownId");
@@ -118,9 +114,9 @@ namespace WebApplication3.Migrations
 
                     b.Property<string>("JobType");
 
-                    b.Property<string>("MainGuildCard");
+                    b.Property<int?>("MainGuildCardId");
 
-                    b.Property<string>("SubGuildCard");
+                    b.Property<int?>("SubGuildCardId");
 
                     b.Property<string>("University");
 
@@ -130,18 +126,54 @@ namespace WebApplication3.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MainGuildCardId");
+
+                    b.HasIndex("SubGuildCardId");
+
                     b.HasIndex("UserId")
                         .IsUnique();
 
                     b.ToTable("PhGraduateds");
                 });
 
-            modelBuilder.Entity("WebApplication3.Models.PhStudent", b =>
+            modelBuilder.Entity("WebApplication3.Models.Photo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CollageCardPhoto");
+                    b.Property<int?>("AssistantId");
+
+                    b.Property<int?>("PhStudentId");
+
+                    b.Property<int?>("PharmacyId");
+
+                    b.Property<string>("PublicId");
+
+                    b.Property<string>("Url");
+
+                    b.Property<int?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssistantId")
+                        .IsUnique();
+
+                    b.HasIndex("PhStudentId")
+                        .IsUnique();
+
+                    b.HasIndex("PharmacyId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Photo");
+                });
+
+            modelBuilder.Entity("WebApplication3.Models.PhStudent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("CollageType");
 
@@ -226,8 +258,6 @@ namespace WebApplication3.Migrations
 
                     b.Property<string>("Phone");
 
-                    b.Property<string>("Photo");
-
                     b.Property<int>("TownId");
 
                     b.Property<string>("UserName");
@@ -299,10 +329,37 @@ namespace WebApplication3.Migrations
 
             modelBuilder.Entity("WebApplication3.Models.PhGraduated", b =>
                 {
+                    b.HasOne("WebApplication3.Models.Photo", "MainGuildCard")
+                        .WithMany()
+                        .HasForeignKey("MainGuildCardId");
+
+                    b.HasOne("WebApplication3.Models.Photo", "SubGuildCard")
+                        .WithMany()
+                        .HasForeignKey("SubGuildCardId");
+
                     b.HasOne("WebApplication3.Models.User", "User")
                         .WithOne("Graduateds")
                         .HasForeignKey("WebApplication3.Models.PhGraduated", "UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WebApplication3.Models.Photo", b =>
+                {
+                    b.HasOne("WebApplication3.Models.Assistant", "Assistant")
+                        .WithOne("NationalIdPhoto")
+                        .HasForeignKey("WebApplication3.Models.Photo", "AssistantId");
+
+                    b.HasOne("WebApplication3.Models.PhStudent", "PhStudent")
+                        .WithOne("CollageCardPhoto")
+                        .HasForeignKey("WebApplication3.Models.Photo", "PhStudentId");
+
+                    b.HasOne("WebApplication3.Models.Pharmacy", "Pharmacy")
+                        .WithOne("LicensePhoto")
+                        .HasForeignKey("WebApplication3.Models.Photo", "PharmacyId");
+
+                    b.HasOne("WebApplication3.Models.User", "User")
+                        .WithOne("Photo")
+                        .HasForeignKey("WebApplication3.Models.Photo", "UserId");
                 });
 
             modelBuilder.Entity("WebApplication3.Models.PhStudent", b =>

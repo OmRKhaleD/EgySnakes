@@ -11,7 +11,7 @@ namespace WebApplication3.Models
         public City City { get; set; }
         public int CityId { get; set; }
         public string DetailedAddress { get; set; }
-        public string LicensePhoto { get; set; }
+        public Photo LicensePhoto { get; set; }
 
     }
 }

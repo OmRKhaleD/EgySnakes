@@ -18,5 +18,6 @@ namespace WebApplication3.Data
         public DbSet<PhGraduated> PhGraduateds { get; set; }
         public DbSet<Manager> Managers {get; set;}
         public DbSet<Pharmacy> Pharmacies { get; set; }
+        public DbSet<Photo> Photo { get; set; }
     } 
 }

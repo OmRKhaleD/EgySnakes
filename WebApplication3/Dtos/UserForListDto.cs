@@ -16,7 +16,7 @@ namespace WebApplication3.Dtos
         public string FullName { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
-        public string Photo { get; set; }
+        public PhotoDto Photo { get; set; }
 
     }
 }

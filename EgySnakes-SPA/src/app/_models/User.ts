@@ -2,6 +2,7 @@ import { City } from "./City";
 import { Manager } from "./Manager";
 import { SocialLinks } from "./SocialLinks";
 import { Town } from "./Town";
+import { Photo } from "./Photo";
 
 export interface User {
     id: number;
@@ -11,7 +12,7 @@ export interface User {
     gender: string;
     created: Date;
     lastActive: Date;
-    photo: string;
+    photo: Photo;
     city: City;
     town: Town;
     nationalId: number;

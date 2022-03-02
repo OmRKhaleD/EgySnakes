@@ -20,7 +20,7 @@ namespace WebApplication3.Models
         public string FullName { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
-        public string Photo { get; set; }
+        public Photo Photo { get; set; }
         public string NationalId { get; set; }
         PhStudent Students { get; set; }
         public PhGraduated Graduateds { get; set; }

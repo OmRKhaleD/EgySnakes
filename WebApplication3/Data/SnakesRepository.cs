@@ -33,6 +33,7 @@ namespace WebApplication3.Data
         {
             var manager = await _context.Managers.Include(s => s.User).ThenInclude(s => s.SocialLinks).
             Include(s => s.User).ThenInclude(s => s.City).Include(s => s.User).ThenInclude(s => s.Town).
+            Include(s => s.User).ThenInclude(s => s.Photo).
                 Include(c => c.City).Include(t =>t.Town).FirstOrDefaultAsync(x => x.Id == id);
             return manager;
         }
@@ -47,6 +48,7 @@ namespace WebApplication3.Data
         {
             var managers = await _context.Managers.Include(s => s.User).ThenInclude(s => s.SocialLinks).
             Include(s => s.User).ThenInclude(s => s.City).Include(s => s.User).ThenInclude(s => s.Town).
+            Include(s => s.User).ThenInclude(s => s.Photo).
                 Include(c => c.City).Include(t =>t.Town).ToListAsync();
             return managers;
         }
@@ -60,7 +62,7 @@ namespace WebApplication3.Data
         public async Task<User> GetUser(int id)
         {
             var user = await _context.Users.Include(s => s.SocialLinks).
-                Include(c => c.City).Include(t => t.Town).Include(m => m.Managers).FirstOrDefaultAsync(x => x.Id == id);
+                Include(c => c.City).Include(p => p.Photo).Include(t => t.Town).Include(m => m.Managers).FirstOrDefaultAsync(x => x.Id == id);
             return user;
         }
 
@@ -70,10 +72,16 @@ namespace WebApplication3.Data
             return user;
         }
 
+        public async Task<Photo> GetUserPhoto(int id)
+        {
+            var photo = await _context.Photo.FirstOrDefaultAsync(x => x.Id == id);
+            return photo;
+        }
+
         public async Task<IEnumerable<User>> GetUsers()
         {
             var users = await _context.Users.Include(s => s.SocialLinks).
-                Include(c => c.City).Include(t =>t.Town).ToListAsync();
+                Include(p => p.Photo).Include(c => c.City).Include(t =>t.Town).ToListAsync();
             return users;
         }
 

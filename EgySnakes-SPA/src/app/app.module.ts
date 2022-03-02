@@ -33,7 +33,8 @@ import { CityTownComponent } from './CityTown/CityTown.component';
 import { CityResolver } from './_resolvers/city.resolver';
 import { TownResolver } from './_resolvers/town.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
-
+import { UserPhotoEditorComponent } from './Managers/UserPhotoEditor/UserPhotoEditor.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 export function tokenGetter(){
@@ -52,12 +53,14 @@ export function tokenGetter(){
       MangerCardComponent,
       ManagerDetailsComponent,
       ManagerEditComponent,
-      CityTownComponent
+      CityTownComponent,
+      UserPhotoEditorComponent
    ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    FileUploadModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     NgxGalleryModule,
