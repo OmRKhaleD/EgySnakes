@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -20,9 +21,12 @@ namespace WebApplication3.Controllers
     {
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
-        public AuthController(IAuthRepository repo, IConfiguration config)
+        private readonly IMapper _mapper;
+
+        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
         {
             _config = config;
+            _mapper = mapper;
             _repo = repo;
 
         }
@@ -68,8 +72,21 @@ namespace WebApplication3.Controllers
             var tokenHandler =new JwtSecurityTokenHandler();
 
             var token =tokenHandler.CreateToken(tokenDescreptor);
+            var user = _mapper.Map<UserForListDto>(userFromRepo);
 
-            return Ok(new {token = tokenHandler.WriteToken(token)}); 
+            return Ok(new
+            {
+                token = tokenHandler.WriteToken(token),
+                user
+            }); 
+        }
+
+        [HttpPost("userExists")]
+        public async Task<IActionResult> UserExists(UserExistsDto userExistsDto)
+        {
+            userExistsDto.Username = userExistsDto.Username.ToLower();
+            var x = await _repo.UserExists(userExistsDto.Username);
+            return Ok(x);
         }
     }
 }

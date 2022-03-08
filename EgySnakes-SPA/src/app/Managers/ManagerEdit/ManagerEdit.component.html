@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="card">
-                <app-UserPhotoEditor [photoUrl]="user.photo.url"></app-UserPhotoEditor>
+                <app-UserPhotoEditor [photoUrl]="photoUrl"></app-UserPhotoEditor>
                 <div class="card-body">
                     <div>
                         <strong>Location:</strong>
@@ -54,7 +54,7 @@
                             </h4>
                             <input name="nationalId" type=" text " class="form-control " [(ngModel)]="user.nationalId">
                             <h4>BirthDay</h4>
-                            <input name="birthday" type=" date " class="form-control " [(ngModel)]="user.dateOfBirth">
+                            <input name="birthday" type="text" bsDatepicker [bsConfig]="bsConfig" class="form-control " [(ngModel)]="user.dateOfBirth">
                             <h4>Phone</h4>
                             <input name="phone" type=" date " class="form-control " [(ngModel)]="user.phone">
                             <h4>

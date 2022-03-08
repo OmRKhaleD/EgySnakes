@@ -7,7 +7,7 @@ import { Manager } from 'src/app/_models/Manager';
   styleUrls: ['./MangerCard.component.css']
 })
 export class MangerCardComponent implements OnInit {
-  @Input() manager: Manager; 
+  @Input() manager: Manager;
 
   constructor() { }
 

@@ -8,6 +8,8 @@ namespace WebApplication3.Models
         public Photo NationalIdPhoto { get; set; }
         public string CV { get; set; }
         public string Qualification { get; set; }
+        public string Type { get; set; }
+        public string Year { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
     }

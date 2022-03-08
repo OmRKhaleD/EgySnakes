@@ -1,0 +1,72 @@
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+  <h2 class="text-center"  style="color:black;">Social Information</h2>
+  <hr>
+  <h5 class="text-left " style="color:red;">* is required</h5>
+  <div class="form-group">
+    <input type="text" 
+    [ngClass]="{'is-invalid': registerForm.get('email').errors 
+    && registerForm.get('email').touched}" 
+    class="form-control" formControlName="email" placeholder="E-mail *" >
+    <div class="invalid-feedback" *ngIf="registerForm.get('email').hasError('required') 
+    && registerForm.get('email').touched">E-mail is required</div>
+    <div class="invalid-feedback" *ngIf="registerForm.get('email').hasError('email') 
+    && registerForm.get('email').touched">Invalid email</div>
+</div>
+
+<div class="form-group">
+  <input type="text" 
+  [ngClass]="{'is-invalid': registerForm.get('whatsapp').errors 
+  && registerForm.get('whatsapp').touched}" 
+  class="form-control" formControlName="whatsapp" placeholder="Whatsapp *" >
+  <div class="invalid-feedback" *ngIf="registerForm.get('whatsapp').hasError('required') 
+  && registerForm.get('whatsapp').touched">Whatsapp is required</div>
+  <div class="invalid-feedback" *ngIf="registerForm.get('whatsapp').hasError('pattern') 
+  && registerForm.get('whatsapp').touched">Invalid whatsapp</div>
+</div>
+
+<div class="form-group">
+<input type="text" 
+[ngClass]="{'is-invalid': registerForm.get('telegram').errors 
+&& registerForm.get('telegram').touched}" 
+class="form-control" formControlName="telegram" placeholder="Telegram *" >
+<div class="invalid-feedback" *ngIf="registerForm.get('telegram').hasError('required') 
+&& registerForm.get('telegram').touched">Telegram is required</div>
+<div class="invalid-feedback" *ngIf="registerForm.get('telegram').hasError('pattern') 
+&& registerForm.get('telegram').touched">Invalid telegram</div>
+</div>
+
+<div class="form-group">
+<input type="text" 
+[ngClass]="{'is-invalid': registerForm.get('facebook').errors 
+&& registerForm.get('facebook').touched}" 
+class="form-control" formControlName="facebook" placeholder="Facebook *" >
+<div class="invalid-feedback" *ngIf="registerForm.get('facebook').hasError('required') 
+&& registerForm.get('facebook').touched">Facebook is required</div>
+<div class="invalid-feedback" *ngIf="registerForm.get('facebook').hasError('pattern') 
+&& registerForm.get('facebook').touched">invalid facebook</div>
+</div>
+
+<div class="form-group">
+<input type="text" 
+[ngClass]="{'is-invalid': registerForm.get('twitter').errors 
+&& registerForm.get('twitter').touched}" 
+class="form-control" formControlName="twitter" placeholder="Twitter" >
+<div class="invalid-feedback">Invalid twitter</div>
+</div>
+
+<div class="form-group">
+<input type="text" 
+[ngClass]="{'is-invalid': registerForm.get('instagram').errors 
+&& registerForm.get('instagram').touched}" 
+class="form-control" formControlName="instagram" placeholder="Instagram" >
+<div class="invalid-feedback">invalid instagram</div>
+</div>
+  <div class="form-group text-center">
+      <button class="btn btn-success mr-2 " [disabled]="!registerForm.valid" type="submit">Next</button>
+      <button class="btn btn-default " type="button " (click)="cancel()">Cancel</button>
+  </div>
+</form>
+
+<p>Form Value: {{registerForm.value | json}}</p>
+<p>Form Status: {{registerForm.status | json}}</p>
+<p>Form Status: {{registerForm.status | json}}</p>

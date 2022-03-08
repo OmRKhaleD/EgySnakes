@@ -1,0 +1,48 @@
+
+    <h2 class="text-center text-primary">Sign Up</h2>
+    <hr>
+
+    <div *ngIf="basicMode" class="container">
+      <div class="row justify-content-center">
+          <app-BasicReg (basic)="getBasicInf($event)"  (cancelRegister)="cancelRegisterMode($event)"></app-BasicReg>
+      </div>
+    </div>
+
+    <div *ngIf="socialMode" class="container">
+      <div class="row justify-content-center">
+          <app-SocialReg (social)="getSocailInf($event)" (cancelRegister)="cancelRegisterMode($event)"></app-SocialReg>
+      </div>
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <div *ngIf="educationMode">
+        <div class="form-group justify-content-center" >
+          <label class="radio-inline">
+            <input class="mr-3" type="radio" value="assisstant" formControlName="job" (change)="assisstantToggle()">Assisstant
+          </label>
+          <label class="radio-inline ml-3">
+            <input class="mr-3" type="radio" value="pharmacist" formControlName="job" (change)="pharmacistToggle()">Pharmacist
+          </label>
+        </div>
+        <div class="form-group" *ngIf="registerForm.get('job').value === 'pharmacist'">
+          <label class="radio-inline">
+            <input class="mr-3" type="radio" value="graduated" formControlName="jobType" (change)="graduatedToggle()">Graduated
+          </label>
+          <label class="radio-inline ml-3">
+            <input class="mr-3" type="radio" value="student" formControlName="jobType" (change)="studentToggle()">Student
+          </label>
+        </div>
+      </div>
+      <div  calss="justify-content-center" *ngIf="assisstantMode">
+        <app-AssisstantReg (assisstant)="getAssisstantInf($event)" (cancelRegister)="cancelRegisterMode($event)"></app-AssisstantReg>
+      </div>
+      <div calss="justify-content-center" *ngIf="studentMode">
+        <app-StudentReg (student)="getStudentInf($event)" (cancelRegister)="cancelRegisterMode($event)"></app-StudentReg>
+      </div>
+      <div *ngIf="graduatedMode">
+        <app-GraduatedReg (graduated)="getgraduatedInf($event)" (cancelRegister)="cancelRegisterMode($event)"></app-GraduatedReg>
+      </div>
+    <div class="form-group text-center" *ngIf="regMode">
+        <button class="btn btn-success mr-2 " type="submit">Register</button>
+        <button class="btn btn-default " type="button " (click)="cancel()">Cancel</button>
+    </div>
+</form>

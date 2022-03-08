@@ -1,0 +1,43 @@
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+  <h4 class="text-center " style="color:black;">Education Information</h4>
+  <hr>
+  <h5 class="text-left " style="color:red;">* is required</h5>
+
+  <div class="form-group">
+      <input type="text" 
+      [ngClass]="{'is-invalid': registerForm.get('qualification').errors 
+      && registerForm.get('qualification').touched}" 
+      class="form-control" formControlName="qualification" placeholder="Qualification *">
+      <div class="invalid-feedback ">Qualification is required</div>
+  </div>
+
+
+  <div class="form-group">
+      <label class="control-label" style="margin-right:10px">Qualification Type: </label>
+      <label class="radio-inline">
+        <input class="mr-3" type="radio" value="high" formControlName="type">High
+      </label>
+      <label class="radio-inline ml-3">
+        <input class="mr-3" type="radio" value="mid" formControlName="type">Mid
+      </label>
+    </div>
+
+  <div class="form-group">
+      <input type="text" 
+      [ngClass]="{'is-invalid': registerForm.get('year').errors 
+      && registerForm.get('year').touched}" 
+      class="form-control" formControlName="year" placeholder="Year of Graduation*">
+      <div class="invalid-feedback" *ngIf="registerForm.get('year').hasError('required') 
+      && registerForm.get('year').touched">Year of Graduation Id is required</div>
+      <div class="invalid-feedback" *ngIf="registerForm.get('year').hasError('pattern') 
+      && registerForm.get('year').touched">invaild Year of Graduation</div>
+  </div>
+  <div class="form-group text-center">
+      <button class="btn btn-success mr-2 " [disabled]="!registerForm.valid" type="submit ">Next</button>
+      <button class="btn btn-default " type="button " (click)="cancel()">Cancel</button>
+  </div>
+</form>
+
+<p>Form Value: {{registerForm.value | json}}</p>
+<p>Form Status: {{registerForm.status | json}}</p>
+<p>Form Status: {{registerForm.status | json}}</p>

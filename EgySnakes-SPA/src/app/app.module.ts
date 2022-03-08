@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import {TabsModule } from 'ngx-bootstrap/tabs';
@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './Nav/Nav.component';
 import {AuthService} from './_services/auth.service';
 import { HomeComponent } from './Home/Home.component';
-import { RegisterComponent } from './Register/Register.component';
+import { RegisterComponent } from './Reg/Register/Register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
 import { ManagerListComponent } from './managers/ManagerList/ManagerList.component';
@@ -35,18 +35,29 @@ import { TownResolver } from './_resolvers/town.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { UserPhotoEditorComponent } from './Managers/UserPhotoEditor/UserPhotoEditor.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BasicRegComponent } from './Reg/BasicReg/BasicReg.component';
+import { SocialRegComponent } from './Reg/SocialReg/SocialReg.component';
+import { AssisstantRegComponent } from './Reg/AssisstantReg/AssisstantReg.component';
+import { StudentRegComponent } from './Reg/StudentReg/StudentReg.component';
+import { GraduatedRegComponent } from './Reg/GraduatedReg/GraduatedReg.component';
 
 
-export function tokenGetter(){
+export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
       NavComponent,
       HomeComponent,
       RegisterComponent,
+      BasicRegComponent,
+      SocialRegComponent,
+      AssisstantRegComponent,
+      StudentRegComponent,
+      GraduatedRegComponent,
       ManagerListComponent,
       TrainingAndEmploymentComponent,
       NotificationsComponent,
@@ -60,8 +71,10 @@ export function tokenGetter(){
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     FileUploadModule,
     BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     TabsModule.forRoot(),
     NgxGalleryModule,
     RouterModule.forRoot(appRoutes),

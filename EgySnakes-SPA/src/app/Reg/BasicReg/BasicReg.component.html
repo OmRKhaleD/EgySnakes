@@ -1,0 +1,134 @@
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+  <h4 class="text-center " style="color:black;">Basic Information</h4>
+  <hr>
+  <h5 class="text-left " style="color:red;">* is required</h5>
+  <div class="form-group">
+      <input type="text" 
+      [ngClass]="{'is-invalid': registerForm.get('username').errors 
+      && registerForm.get('username').touched}" 
+      class="form-control" formControlName="username" placeholder="Username *" >
+      <div class="invalid-feedback" *ngIf="registerForm.get('username').hasError('required') 
+      && registerForm.get('username').touched">Username is required</div>
+      <div class="invalid-feedback" *ngIf="registerForm.get('username').hasError('exists') 
+      && registerForm.get('username').touched">username already exists</div>
+      
+  </div>
+
+  <div class="form-group">
+      <input type="text" 
+      [ngClass]="{'is-invalid': registerForm.get('fullname').errors 
+      && registerForm.get('fullname').touched}" 
+      class="form-control" formControlName="fullname" placeholder="Full name *">
+      <div class="invalid-feedback ">Full name is required</div>
+  </div>
+
+
+  <div class="form-group">
+      <label class="control-label" style="margin-right:10px">I am a: </label>
+      <label class="radio-inline">
+        <input class="mr-3" type="radio" value="male" formControlName="gender">Male
+      </label>
+      <label class="radio-inline ml-3">
+        <input class="mr-3" type="radio" value="female" formControlName="gender">Female
+      </label>
+    </div>
+    <div class="form-group">
+      <select class="form-control" 
+      [ngClass]="{'is-invalid':registerForm.get('cityId').touched && registerForm.get('cityId').errors}"
+      formControlName="cityId" (change)="updateCity()">
+          <option value="">Select City *</option>
+          <option *ngFor="let city of cities"    [value]="city.id">
+          {{city.name}}
+      </option>
+  </select>
+  <div class="invalid-feedback ">City is required</div>
+    </div>
+
+    <div class="form-group">
+      <select 
+      [ngClass]="{'is-invalid':registerForm.get('townId').touched && registerForm.get('townId').errors}"
+      class="form-control" formControlName="townId">
+          <option value="">Select Town *</option>
+          <option *ngFor="let town of towns"    [value]="town.id">
+          {{town.name}}
+      </option>
+  </select>
+  <div class="invalid-feedback ">Town is required</div>
+    </div>
+
+    <div class="form-group">
+      <input type="text" 
+      [ngClass]="{'is-invalid': registerForm.get('phone').errors 
+      && registerForm.get('phone').touched}" 
+      class="form-control" formControlName="phone" placeholder="Phone *">
+      <div class="invalid-feedback" *ngIf="registerForm.get('phone').hasError('required') 
+      && registerForm.get('phone').touched">Phone is required</div>
+      <div class="invalid-feedback" *ngIf="registerForm.get('phone').hasError('pattern') 
+      && registerForm.get('phone').touched">invalid phone number</div>
+  </div>
+  <div class="form-group">
+      <input type="text" 
+      [ngClass]="{'is-invalid': registerForm.get('nationalId').errors 
+      && registerForm.get('nationalId').touched}" 
+      class="form-control" formControlName="nationalId" placeholder="National Id *">
+      <div class="invalid-feedback" *ngIf="registerForm.get('nationalId').hasError('required') 
+      && registerForm.get('nationalId').touched">National Id is required</div>
+      <div class="invalid-feedback" *ngIf="registerForm.get('nationalId').hasError('pattern') 
+      && registerForm.get('nationalId').touched">invaild National Id</div>
+  </div>
+
+  <div class="form-group">
+      <input [ngClass]="{'is-invalid': registerForm.get('dateOfBirth').errors && registerForm.get('dateOfBirth').touched}" class="form-control"
+        placeholder="Date of Birth *" formControlName="dateOfBirth" type="text" bsDatepicker [bsConfig]="bsConfig">
+      <div class="invalid-feedback" *ngIf="registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')">Date of Birth is required</div>
+    </div>
+
+  <div class="form-group">
+      <input type="password"
+      [ngClass]="{'is-invalid': registerForm.get('password').errors 
+      && registerForm.get('password').touched}" 
+      class="form-control " formControlName="password" placeholder="Password *">
+      <div class="invalid-feedback"
+      *ngIf="registerForm.get('password').hasError('required') 
+      && registerForm.get('password').touched">
+      Password is required
+  </div>
+  <div class="invalid-feedback"
+      *ngIf="registerForm.get('password').hasError('minlength') 
+      && registerForm.get('password').touched">
+      Password must be 8 charachters
+  </div>
+  <div class="invalid-feedback"
+      *ngIf="registerForm.get('password').hasError('maxlength') 
+      && registerForm.get('password').touched">
+      Password must be 8 charachter
+  </div>
+  </div>
+
+  <div class="form-group ">
+      <input type="password" 
+      [ngClass]="{'is-invalid': registerForm.get('confirmPassword').errors 
+      && registerForm.get('confirmPassword').touched
+      || registerForm.get('confirmPassword').touched
+      && registerForm.hasError('mismatch')}" 
+      class="form-control " formControlName="confirmPassword" placeholder="Confirm Password *">
+      <div class="invalid-feedback"
+      *ngIf="registerForm.get('confirmPassword').hasError('required') 
+      && registerForm.get('confirmPassword').touched">
+      Password is required
+  </div>
+  <div class="invalid-feedback"
+  *ngIf="registerForm.hasError('mismatch') 
+  && registerForm.get('confirmPassword').touched">
+  Password mismatch
+  </div>
+  </div>
+  <div class="form-group text-center">
+      <button class="btn btn-success mr-2 " [disabled]="!registerForm.valid" type="submit ">Next</button>
+      <button class="btn btn-default " type="button " (click)="cancel()">Cancel</button>
+  </div>
+</form>
+
+<p>Form Value: {{registerForm.value | json}}</p>
+<p>Form Status: {{registerForm.status | json}}</p>
+<p>Form Status: {{registerForm.status | json}}</p>

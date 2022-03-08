@@ -11,7 +11,6 @@ using WebApplication3.Dtos;
 
 namespace WebApplication3.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
